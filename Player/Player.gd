@@ -13,16 +13,15 @@ enum State {
 var state = State.MOVE
 var velocity = Vector2.ZERO
 
-onready var movingAnimationPlayer = $MovingAnimation
-onready var movingAnimationTree = $MovingAnimationTree
+onready var animationTree = $AnimationTree
 # pega os valores do State Machine da animation tree
-onready var movingAnimationState = movingAnimationTree.get("parameters/playback")
+onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
-	movingAnimationTree.active = true
+	animationTree.active = true
 	
 	var input_vector = Vector2.DOWN
-	movingAnimationTree.set("parameters/Idle/blend_position", input_vector)
+	animationTree.set("parameters/Idle/blend_position", input_vector)
 
 func _physics_process(delta):
 	match state:
@@ -36,7 +35,8 @@ func _physics_process(delta):
 			handle_roll(delta)
 	
 func handle_attack(_delta):
-	print("Attack!")
+	velocity = Vector2.ZERO
+	animationState.travel("Attack")
 	
 func handle_move(delta):
 	var input_vector = Vector2.ZERO
@@ -47,17 +47,24 @@ func handle_move(delta):
 	
 	if input_vector != Vector2.ZERO:
 		# seta os valores para Idle e Run da animation tree
-		movingAnimationTree.set("parameters/Idle/blend_position", input_vector)
-		movingAnimationTree.set("parameters/Run/blend_position", input_vector)
+		animationTree.set("parameters/Idle/blend_position", input_vector)
+		animationTree.set("parameters/Run/blend_position", input_vector)
+		animationTree.set("parameters/Attack/blend_position", input_vector)
 		# define com o state de run
-		movingAnimationState.travel("Run")
+		animationState.travel("Run")
 		# Se move na até o valor X, baseado no valor Y
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-		movingAnimationState.travel("Idle")
+		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	velocity = move_and_slide(velocity)
 	
+	if Input.is_action_just_pressed("attack"):
+		state = State.ATTACK
+	
 func handle_roll(delta):
 	print("Roll!")
+	
+func handle_attack_animation_end():
+	state = State.MOVE
