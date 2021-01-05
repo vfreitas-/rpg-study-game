@@ -23,7 +23,10 @@ func _ready():
 	var input_vector = Vector2.DOWN
 	animationTree.set("parameters/Idle/blend_position", input_vector)
 
-func _physics_process(delta):
+# _physics_process: quando acessamos alguma propriedade que tenha a ver com o posicionamento
+# do KitematicBody por exemplo, com a fisica dele
+# _process: quando não acessamos esses valores e temos uma função mais pura com valores próprios
+func _process(delta):
 	match state:
 		State.ATTACK:
 			handle_attack(delta)
@@ -33,10 +36,6 @@ func _physics_process(delta):
 			
 		State.ROLL:
 			handle_roll(delta)
-	
-func handle_attack(_delta):
-	velocity = Vector2.ZERO
-	animationState.travel("Attack")
 	
 func handle_move(delta):
 	var input_vector = Vector2.ZERO
@@ -62,6 +61,10 @@ func handle_move(delta):
 	
 	if Input.is_action_just_pressed("attack"):
 		state = State.ATTACK
+		
+func handle_attack(_delta):
+	velocity = Vector2.ZERO
+	animationState.travel("Attack")
 	
 func handle_roll(delta):
 	print("Roll!")
