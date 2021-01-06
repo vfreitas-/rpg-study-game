@@ -17,6 +17,7 @@ offset = Vector2( -8, -8 )
 flip_v = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 2147483656
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 7.7719, 8.80516 )
