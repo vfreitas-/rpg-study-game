@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/PlayerDetectionZone.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CollisionShape2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="PlayerDetectionZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+script = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_PlayerDetectionZone_body_exited"]
