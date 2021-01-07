@@ -18,9 +18,12 @@ var roll_vector = Vector2.DOWN
 onready var animationTree = $AnimationTree
 # pega os valores do State Machine da animation tree
 onready var animationState = animationTree.get("parameters/playback")
+onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 func _ready():
 	animationTree.active = true
+	
+	swordHitbox.knockback_vector = roll_vector
 	
 	var input_vector = Vector2.DOWN
 	animationTree.set("parameters/Idle/blend_position", input_vector)
@@ -48,6 +51,7 @@ func handle_move(delta):
 	
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
+		swordHitbox.knockback_vector = input_vector
 		# seta os valores para Idle e Run da animation tree
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
