@@ -14,13 +14,18 @@ enum State {
 var state = State.MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
+# acessa nosso singleton global configurado em Project/Autoload
+var playerStats = PlayerStats
 
 onready var animationTree = $AnimationTree
 # pega os valores do State Machine da animation tree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
+onready var hurtBox = $Hurtbox
 
 func _ready():
+	playerStats.connect("no_health", self, "queue_free")
+	
 	animationTree.active = true
 	
 	swordHitbox.knockback_vector = roll_vector
@@ -92,3 +97,9 @@ func handle_roll_animation_end():
 	
 func handle_attack_animation_end():
 	state = State.MOVE
+
+func _on_Hurtbox_area_entered(_area):
+	if hurtBox.invincible == false:
+		playerStats.health -= 1
+		hurtBox.start_invincibility(0.5)
+		hurtBox.create_hit_effect()

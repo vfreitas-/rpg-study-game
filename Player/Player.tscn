@@ -1,9 +1,10 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://CollisionBoxes/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/SwordHitbox.gd" type="Script" id=4]
+[ext_resource path="res://CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.48
@@ -287,7 +288,7 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=47]
+[sub_resource type="Animation" id=10]
 resource_name = "RollDown"
 length = 0.5
 tracks/0/type = "value"
@@ -317,7 +318,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=11]
 resource_name = "RollLeft"
 length = 0.5
 tracks/0/type = "value"
@@ -347,7 +348,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=12]
 resource_name = "RollRight"
 length = 0.5
 tracks/0/type = "value"
@@ -377,7 +378,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=13]
 resource_name = "RollUp"
 length = 0.5
 tracks/0/type = "value"
@@ -407,7 +408,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=51]
+[sub_resource type="Animation" id=14]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -423,7 +424,7 @@ tracks/0/keys = {
 "values": [ 19, 20, 21, 22, 23, 18 ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=15]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -439,7 +440,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 15, 16, 17, 12 ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=16]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -455,7 +456,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 0 ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=17]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -600,6 +601,8 @@ start_node = "Idle"
 [sub_resource type="CapsuleShape2D" id=46]
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id=47]
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -611,12 +614,12 @@ __meta__ = {
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 49
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.28157, 0.578861 )
+position = Vector2( -0.00278521, 0.13598 )
 rotation = -1.5708
-scale = Vector2( 0.571054, 0.520723 )
+scale = Vector2( 0.680211, 0.731591 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -628,14 +631,14 @@ anims/IdleDown = SubResource( 6 )
 anims/IdleLeft = SubResource( 7 )
 anims/IdleRight = SubResource( 8 )
 anims/IdleUp = SubResource( 9 )
-anims/RollDown = SubResource( 47 )
-anims/RollLeft = SubResource( 48 )
-anims/RollRight = SubResource( 49 )
-anims/RollUp = SubResource( 50 )
-anims/RunDown = SubResource( 51 )
-anims/RunLeft = SubResource( 52 )
-anims/RunRight = SubResource( 53 )
-anims/RunUp = SubResource( 54 )
+anims/RollDown = SubResource( 10 )
+anims/RollLeft = SubResource( 11 )
+anims/RollRight = SubResource( 12 )
+anims/RollUp = SubResource( 13 )
+anims/RunDown = SubResource( 14 )
+anims/RunLeft = SubResource( 15 )
+anims/RunRight = SubResource( 16 )
+anims/RunUp = SubResource( 17 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 44 )
@@ -661,4 +664,16 @@ scale = Vector2( 1.05012, 1.0704 )
 shape = SubResource( 46 )
 disabled = true
 
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 2147483652
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+modulate = Color( 0.980392, 0.627451, 0.627451, 1 )
+position = Vector2( -0.620033, -2.92302 )
+scale = Vector2( 0.620784, 0.495048 )
+shape = SubResource( 47 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
 [editable path="HitboxPivot/SwordHitbox"]
+
+[editable path="Hurtbox"]
