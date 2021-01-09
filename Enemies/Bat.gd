@@ -21,6 +21,7 @@ onready var sprite = $AnimatedSprite
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtBox = $Hurtbox
+onready var softCollision = $SoftCollision
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
@@ -42,15 +43,22 @@ func _physics_process(delta):
 				state = State.IDLE
 			sprite.flip_h = velocity.x < 0
 	
+	# Caso eu queira lidar com a colisão através de uma lógica própria
+	# Temos também a opção de colocar em Collision a Mask do Bat como Enemy
+	# Dizendo que o collision do bat pode colidir com outros Enemies
+	# Porém visualmente não fica tao robusto quanto essa solução de afastamento
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 400
+
 	velocity = move_and_slide(velocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
-		print('CHAAAASEEE')
 		state = State.CHASE
 
 # Callbacks and Signals
 func _on_Hurtbox_area_entered(area):
+	print(area)
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
 	hurtBox.create_hit_effect()

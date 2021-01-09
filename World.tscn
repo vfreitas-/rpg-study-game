@@ -487,7 +487,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="World" type="Node2D"]
 
 [node name="GrassBackground" type="Sprite" parent="."]
-position = Vector2( 160, 90 )
+position = Vector2( 160, 90.1942 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 1, 1, 320, 180 )
@@ -576,14 +576,52 @@ position = Vector2( 39.5656, 118.697 )
 [node name="Tree3" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 190.989, 37.7746 )
 
-[node name="Bat" parent="YSort" instance=ExtResource( 7 )]
+[node name="Bats" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Bats" instance=ExtResource( 7 )]
 position = Vector2( 216.502, 57.3467 )
 
-[node name="Bat2" parent="YSort" instance=ExtResource( 7 )]
+[node name="Bat2" parent="YSort/Bats" instance=ExtResource( 7 )]
 position = Vector2( 170.951, 148.448 )
 
-[node name="Bat3" parent="YSort" instance=ExtResource( 7 )]
+[node name="Bat3" parent="YSort/Bats" instance=ExtResource( 7 )]
 position = Vector2( 76.7648, 105.075 )
+
+[node name="Bat4" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 96.576, 108.765 )
+
+[node name="Bat5" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 115.028, 112.067 )
+
+[node name="Bat6" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 127.264, 120.225 )
+
+[node name="Bat7" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 135.227, 112.844 )
+
+[node name="Bat8" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 123.185, 101.579 )
+
+[node name="Bat9" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 63.7516, 84.6811 )
+
+[node name="Bat10" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 69.5784, 73.416 )
+
+[node name="Bat11" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 70.7438, 57.2951 )
+
+[node name="Bat12" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 71.7149, 42.3396 )
+
+[node name="Bat13" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 82.3974, 42.728 )
+
+[node name="Bat14" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 82.3974, 50.4971 )
+
+[node name="Bat15" parent="YSort/Bats" instance=ExtResource( 7 )]
+position = Vector2( 82.3974, 50.4971 )
 
 [node name="HealthUI" parent="." instance=ExtResource( 8 )]
 margin_left = 10.0
