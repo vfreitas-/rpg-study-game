@@ -22,6 +22,7 @@ onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
+onready var wanderCtrl = $WanderController
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
@@ -31,13 +32,33 @@ func _physics_process(delta):
 		State.IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
-			
+
+			if wanderCtrl.get_time_left() == 0:
+				state = pick_random_state([State.IDLE, State.WANDER])
+				wanderCtrl.start_wander_timer(rand_range(1, 3))
+
 		State.WANDER:
-			pass
+			seek_player()
+			
+			if wanderCtrl.get_time_left() == 0:
+				state = pick_random_state([State.IDLE, State.WANDER])
+				wanderCtrl.start_wander_timer(rand_range(1, 3))
+				
+			var direction = global_position.direction_to(wanderCtrl.target_position)
+			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+			
+			if global_position.distance_to(wanderCtrl.target_position) <= 4:
+				state = pick_random_state([State.IDLE, State.WANDER])
+				wanderCtrl.start_wander_timer(rand_range(1, 3))
+				
+			sprite.flip_h = velocity.x < 0
+			
 		State.CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				var direction = (player.global_position - global_position).normalized()
+				# outra forma de fazer
+				#var direction = (player.global_position - global_position).normalized()
+				var direction = global_position.direction_to(player.global_position)
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
 				state = State.IDLE
@@ -55,10 +76,13 @@ func _physics_process(delta):
 func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = State.CHASE
+		
+func pick_random_state(state_list: Array):
+	state_list.shuffle()
+	return state_list.pop_front()
 
 # Callbacks and Signals
 func _on_Hurtbox_area_entered(area):
-	print(area)
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
 	hurtBox.create_hit_effect()

@@ -497,7 +497,7 @@ region_rect = Rect2( 1, 1, 495, 319 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -65523, 0, 0, -65522, 0, 2, 13, 0, 65536, 14, 0, 65538, 65549, 0, 65536, 65550, 0, 65538, 131085, 0, 65536, 131086, 0, 262149, 131087, 0, 196610, 196615, 0, 0, 196616, 0, 1, 196617, 0, 1, 196618, 0, 1, 196619, 0, 1, 196620, 0, 1, 196621, 0, 131078, 196622, 0, 65538, 262151, 0, 65540, 262152, 0, 131073, 262153, 0, 65542, 262154, 0, 65537, 262155, 0, 65537, 262156, 0, 65541, 262157, 0, 131073, 262158, 0, 131074, 327685, 0, 4, 327686, 0, 196609, 327687, 0, 196615, 327689, 0, 131072, 327690, 0, 131073, 327691, 0, 131073, 327692, 0, 131074, 393220, 0, 4, 393221, 0, 196615, 458755, 0, 4, 458756, 0, 196615, 589823, 0, 196608, 524288, 0, 196609, 524289, 0, 196609, 524290, 0, 196609, 524291, 0, 196615 )
+tile_data = PoolIntArray( -131075, 0, 3, -65539, 0, 65539, -3, 0, 65539, -65523, 0, 0, -65522, 0, 2, 65533, 0, 65539, 13, 0, 65536, 14, 0, 65538, 131069, 0, 65539, 65549, 0, 65536, 65550, 0, 65538, 196605, 0, 65539, 131085, 0, 65536, 131086, 0, 262149, 131087, 0, 196610, 262141, 0, 65539, 196615, 0, 0, 196616, 0, 1, 196617, 0, 1, 196618, 0, 1, 196619, 0, 1, 196620, 0, 1, 196621, 0, 131078, 196622, 0, 65538, 327677, 0, 65539, 262151, 0, 65540, 262152, 0, 131073, 262153, 0, 65542, 262154, 0, 65537, 262155, 0, 65537, 262156, 0, 65541, 262157, 0, 131073, 262158, 0, 131074, 393213, 0, 65539, 327685, 0, 4, 327686, 0, 196609, 327687, 0, 196615, 327689, 0, 131072, 327690, 0, 131073, 327691, 0, 131073, 327692, 0, 131074, 458749, 0, 65539, 393220, 0, 4, 393221, 0, 196615, 524285, 0, 65539, 458755, 0, 4, 458756, 0, 196615, 589821, 0, 262148, 589822, 0, 196609, 589823, 0, 196609, 524288, 0, 196609, 524289, 0, 196609, 524290, 0, 196609, 524291, 0, 196615, 655357, 0, 65539, 720893, 0, 65539, 786429, 0, 65539, 851965, 0, 65539, 917501, 0, 196612, 917502, 0, 7, 983038, 0, 131075 )
 
 [node name="DirtCliffTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 49 )
@@ -579,6 +579,9 @@ position = Vector2( 195.077, 143.191 )
 [node name="Tree" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 223.391, 87.4351 )
 
+[node name="Tree4" parent="YSort/Trees" instance=ExtResource( 9 )]
+position = Vector2( 85.2458, 0.7286 )
+
 [node name="Tree2" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 39.5656, 118.697 )
 
@@ -588,49 +591,16 @@ position = Vector2( 190.989, 37.7746 )
 [node name="Bats" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 216.502, 57.3467 )
+position = Vector2( 29.9816, 6.44297 )
 
 [node name="Bat2" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 170.951, 148.448 )
+position = Vector2( 64.0152, 144.459 )
 
 [node name="Bat3" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 76.7648, 105.075 )
+position = Vector2( 12.5653, 37.2667 )
 
 [node name="Bat4" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 96.576, 108.765 )
-
-[node name="Bat5" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 115.028, 112.067 )
-
-[node name="Bat6" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 127.264, 120.225 )
-
-[node name="Bat7" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 135.227, 112.844 )
-
-[node name="Bat8" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 123.185, 101.579 )
-
-[node name="Bat9" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 63.7516, 84.6811 )
-
-[node name="Bat10" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 69.5784, 73.416 )
-
-[node name="Bat11" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 70.7438, 57.2951 )
-
-[node name="Bat12" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 71.7149, 42.3396 )
-
-[node name="Bat13" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 82.3974, 42.728 )
-
-[node name="Bat14" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 82.3974, 50.4971 )
-
-[node name="Bat15" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 82.3974, 50.4971 )
+position = Vector2( 25.5387, 142.004 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
