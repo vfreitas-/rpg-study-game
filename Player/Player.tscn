@@ -673,7 +673,6 @@ disabled = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 visible = false
-collision_layer = 2147483652
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 modulate = Color( 0.980392, 0.627451, 0.627451, 1 )
