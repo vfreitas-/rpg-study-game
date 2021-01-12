@@ -3,7 +3,7 @@ extends KinematicBody2D
 export(int) var ACCELERATION = 500
 export(int) var MAX_SPEED = 80
 export(int) var FRICTION = 500
-export(int) var ROLL_SPEED = 110
+export(int) var ROLL_SPEED = 95
 
 enum State {
 	ATTACK,
