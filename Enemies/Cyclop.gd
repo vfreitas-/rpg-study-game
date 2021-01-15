@@ -3,7 +3,7 @@ extends KinematicBody2D
 export(int) var ACCELERATION = 300
 export(int) var MAX_SPEED = 50
 export(int) var FRICTION = 200
-export var RATE_ATTACK = 0.3
+export var RATE_ATTACK = 0.6
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
@@ -51,8 +51,7 @@ func _physics_process(delta):
 			
 func handle_idle(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	# TODO: arrumar o vetor passado pro animation tree
-	animationTree.set("parameters/Idle/blend_position", Vector2.ZERO)
+	animationTree.set("parameters/Idle/blend_position", last_direction)
 	animationState.travel("Idle")
 	seek_player()
 	
@@ -67,12 +66,12 @@ func handle_chase(delta):
 	else:
 		state = State.IDLE
 	
-func handle_attack(delta):
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+func handle_attack(_delta):
+	velocity = Vector2.ZERO
 	if can_attack:
 		animationTree.set("parameters/Attack/blend_position", last_direction)
 		animationState.travel("Attack")
-		can_attack = false
+		#can_attack = false
 	else:
 		#hitboxDetectionZone.toggleMonitoring(true)
 		#seek_player()
@@ -86,10 +85,11 @@ func seek_player():
 
 # Callbacks and Signals
 func _on_attack_animation_end():
-	print('callback')
-	seek_player()
+	state = State.IDLE
+	#seek_player()
 	hitboxDetectionZone.toggleMonitoring(true)
 	attackTimer.start(RATE_ATTACK)
+	pass
 
 func _on_HitboxDetectionZone_body_entered(_body):
 	hitboxDetectionZone.toggleMonitoring(false)
@@ -97,6 +97,7 @@ func _on_HitboxDetectionZone_body_entered(_body):
 
 func _on_AttackTimer_timeout():
 	can_attack = true
+	pass
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage

@@ -605,10 +605,6 @@ position = Vector2( 25.5387, 142.004 )
 
 [node name="Cyclop" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 295.546, 109.215 )
-ACCELERATION = 300
-MAX_SPEED = 50
-FRICTION = 200
-RATE_ATTACK = 0.3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

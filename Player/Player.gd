@@ -100,6 +100,6 @@ func handle_attack_animation_end():
 
 func _on_Hurtbox_area_entered(area):
 	if hurtBox.invincible == false:
-		playerStats.health -= area.damage
+		#playerStats.health -= area.damage
 		hurtBox.start_invincibility(0.5)
 		hurtBox.create_hit_effect()
